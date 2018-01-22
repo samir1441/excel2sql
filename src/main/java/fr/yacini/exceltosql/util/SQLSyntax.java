@@ -18,5 +18,10 @@ public class SQLSyntax {
 	public static final String CLOSING_BRACKET = ")";
 	public static final String SPACE = " ";
 	public static final String SET_DEFINE_OFF = "set define off";
+	public static final String COMMIT = "commit";
+	public static final String COMMENT_BEGIN = "/*";
+	public static final String COMMENT_END = "*/";
+	public static final String STAR = "*";
+	public static final String STAR_LINE = "********************";
 
 }

@@ -24,12 +24,14 @@ import fr.yacini.exceltosql.model.RowModel;
  */
 public class WorkbookUtils {
 
+	public static final String DATABASE_PREFIX = "DB";
 	public static final String NUMERIC_PREFIX = "IS";
 	public static final String DATE_PREFIX = "D";
 	public static final String BOOLEAN_PREFIX = "B";
 	public static final String CODE_PREFIX = "CD";
 	public static final String LONG_STRING_PREFIX = "LB";
 	public static final String SHORT_STRING_PREFIX = "LP";
+	public static final String UNDERSCORE = "_";
 
 	/**
 	 * @param numericCellValue

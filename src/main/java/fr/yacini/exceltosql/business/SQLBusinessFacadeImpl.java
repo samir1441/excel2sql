@@ -29,6 +29,10 @@ public class SQLBusinessFacadeImpl implements ISQLBuilderBusinessFacade {
 		}
 		final StringBuilder sql = new StringBuilder();
 
+		this.queryBuilder.setDefineOff();
+		sql.append(this.queryBuilder.getSql());
+		this.queryBuilder.reset();
+
 		for (final SheetModel sheet : workbookModel.getSheets()) {
 			if (sheet.getRows().size() > 0) {
 				final String table = sheet.getLabel();
@@ -38,16 +42,17 @@ public class SQLBusinessFacadeImpl implements ISQLBuilderBusinessFacade {
 			}
 		}
 
+		this.queryBuilder.commit();
+		sql.append(this.queryBuilder.getSql());
+		this.queryBuilder.reset();
+
 		return sql.toString();
 	}
 
 	private String generateSql(final String table, final List<String> columns, final List<RowModel> values) {
 		final StringBuilder sb = new StringBuilder();
-		this.queryBuilder.setDefineOff();
-		sb.append(this.queryBuilder.getSql());
-		this.queryBuilder.reset();
 		for (final RowModel row : values) {
-			if (values.indexOf(row) == 0) {
+			if (row.getRowNumber() == 1) {
 				this.queryBuilder.comments(table);
 				sb.append(this.queryBuilder.getSql());
 				this.queryBuilder.reset();

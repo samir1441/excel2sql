@@ -6,6 +6,7 @@ import fr.yacini.exceltosql.model.CellModel;
 import fr.yacini.exceltosql.model.RowModel;
 import fr.yacini.exceltosql.util.QueryBuilderUtils;
 import fr.yacini.exceltosql.util.SQLSyntax;
+import fr.yacini.exceltosql.util.WorkbookUtils;
 import lombok.Data;
 
 @Data
@@ -76,9 +77,59 @@ public class QueryBuilder {
 		return sb.toString();
 	}
 
-	public void comments(final String table) {
-		// TODO Auto-generated method stub
+	public void comments(final String tableName) {
+		final StringBuilder sb = new StringBuilder();
+		sb.append(System.getProperty("line.separator"));
+		this.buildCommentLine(sb, tableName, false);
+		this.buildCommentLine(sb, tableName, true);
+		this.buildCommentLine(sb, tableName, false);
+		sb.append(System.getProperty("line.separator"));
+		this.sql = sb.toString();
+	}
 
+	private void buildCommentLine(final StringBuilder sb, final String tableName, final boolean withText) {
+		final String commentText = tableName == null ? "" : this.getCommentText(tableName);
+		sb.append(SQLSyntax.COMMENT_BEGIN);
+		if (withText) {
+			sb.append(SQLSyntax.STAR_LINE).append(SQLSyntax.SPACE).append(commentText).append(SQLSyntax.SPACE)
+					.append(SQLSyntax.STAR_LINE);
+		} else {
+			final int lineWidth = SQLSyntax.STAR_LINE.length() * 2 + commentText.length() + 2;
+			for (int i = 0; i < lineWidth; i++) {
+				sb.append(SQLSyntax.STAR);
+			}
+		}
+		sb.append(SQLSyntax.COMMENT_END).append(System.getProperty("line.separator"));
+	}
+
+	private String getCommentText(final String table) {
+		final StringBuilder sb = new StringBuilder();
+		final String[] sequence = table.split(WorkbookUtils.UNDERSCORE);
+		for (int i = 0; i < sequence.length; i++) {
+			if (!sequence[i].equals(WorkbookUtils.DATABASE_PREFIX)) {
+				sb.append(this.getWordWithFirstUpperCase(sequence[i]));
+				if (i != sequence.length - 1) {
+					sb.append(SQLSyntax.SPACE);
+				} else if (i == sequence.length - 1 && !sequence[i].toLowerCase().equals("s")) {
+					sb.append("s");
+				}
+			}
+		}
+		return sb.toString();
+	}
+
+	private String getWordWithFirstUpperCase(String s) {
+		if (s.length() == 0) {
+			return s;
+		}
+		s = s.toUpperCase();
+		final char[] sequence = s.toCharArray();
+		if (s.length() > 1) {
+			for (int i = 1; i < sequence.length; i++) {
+				sequence[i] = Character.toLowerCase(sequence[i]);
+			}
+		}
+		return String.valueOf(sequence);
 	}
 
 	public void reset() {
@@ -88,6 +139,14 @@ public class QueryBuilder {
 	public void setDefineOff() {
 		final StringBuilder sb = new StringBuilder();
 		sb.append(SQLSyntax.SET_DEFINE_OFF).append(SQLSyntax.SEMICOLON).append(System.getProperty("line.separator"));
+		sb.append(System.getProperty("line.separator"));
+		this.sql = sb.toString();
+	}
+
+	public void commit() {
+		final StringBuilder sb = new StringBuilder();
+		sb.append(System.getProperty("line.separator"));
+		sb.append(SQLSyntax.COMMIT).append(SQLSyntax.SEMICOLON);
 		sb.append(System.getProperty("line.separator"));
 		this.sql = sb.toString();
 	}
