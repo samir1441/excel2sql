@@ -2,15 +2,15 @@ package fr.yacini.exceltosql.util;
 
 public class QueryBuilderUtils {
 
-	private static final String ESCAPE_CHARS = "'&=?{}\\()[]-;~|$!>*%_";
-	private static final char ESCAPE_CHAR = '\\';
+	private static final String SPECIAL_CHARS = "'";
+	private static final char ESCAPE_CHAR = '\'';
 
 	public static String parseToString(final String data) {
 		final StringBuilder sb = new StringBuilder();
 		final char[] dataChars = data.toCharArray();
 		sb.append(SQLSyntax.SINGLE_QUOTE);
 		for (final char character : dataChars) {
-			if (QueryBuilderUtils.ESCAPE_CHARS.indexOf(character) != -1) {
+			if (QueryBuilderUtils.SPECIAL_CHARS.indexOf(character) != -1) {
 				sb.append(QueryBuilderUtils.ESCAPE_CHAR);
 			}
 			sb.append(character);

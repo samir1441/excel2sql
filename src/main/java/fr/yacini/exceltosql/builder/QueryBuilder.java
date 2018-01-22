@@ -75,4 +75,20 @@ public class QueryBuilder {
 		sb.append(SQLSyntax.INSERT_INTO).append(SQLSyntax.SPACE).append(tableName);
 		return sb.toString();
 	}
+
+	public void comments(final String table) {
+		// TODO Auto-generated method stub
+
+	}
+
+	public void reset() {
+		this.sql = null;
+	}
+
+	public void setDefineOff() {
+		final StringBuilder sb = new StringBuilder();
+		sb.append(SQLSyntax.SET_DEFINE_OFF).append(SQLSyntax.SEMICOLON).append(System.getProperty("line.separator"));
+		sb.append(System.getProperty("line.separator"));
+		this.sql = sb.toString();
+	}
 }
