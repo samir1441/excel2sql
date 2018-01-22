@@ -1,0 +1,16 @@
+.noLeadingSpace {
+	-moz-tab-size: 0 !important;
+	-o-tab-size: 0 !important;
+	tab-size: 0 !important;
+	white-space: pre !important;
+	background-color: #ffffff !important;
+	font-size: 13px !important;
+	white-space: pre;
+}
+
+.hiddenSql {
+	height: 0px;
+	width: 0px;
+	border: none;
+	border-width: 0 !important;
+}

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+<h:head>
+	<f:facet name="first">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta name="viewport"
+			content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+	</f:facet>
+	<title>Excel to SQL</title>
+	<h:outputScript name="js/nanoscroller.js" library="serenity-layout" />
+	<h:outputScript name="js/layout.js" library="serenity-layout" />
+	<h:outputScript name="js/ripple.js" library="serenity-layout" />
+	<h:outputScript name="js/prism.js" library="prism" />
+	<h:outputScript name="js/clipboard.min.js" library="clipboard" />
+	<h:outputScript name="js/general.js" library="general" />
+	
+</h:head>
+<h:body>
+
+	<p:layout fullPage="true">
+
+		<p:layoutUnit position="north" size="130" resizable="false"
+			closable="false" collapsible="false" style="border: none; margin: 0; padding: 2px;">
+			<ui:insert name="upload" />
+		</p:layoutUnit>
+	
+		<p:layoutUnit position="center" style="margin: 0; padding: 2px;">
+			<ui:insert name="output" />
+		</p:layoutUnit>
+
+	</p:layout>
+
+</h:body>
+<h:outputStylesheet name="css/nanoscroller.css" library="serenity-layout" />
+<h:outputStylesheet name="css/ripple.css" library="serenity-layout" />
+<h:outputStylesheet name="css/layout-bluegrey.css" library="serenity-layout" />
+<h:outputStylesheet name="css/prism.css" library="prism" />
+<h:outputStylesheet name="css/style.css" library="general" />
+
+</html>
