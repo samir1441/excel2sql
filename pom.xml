@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>fr.yacini</groupId>
 	<artifactId>exceltosql</artifactId>
-	<version>0.2.0-RELEASE</version>
+	<version>0.3.0-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<dependencies>

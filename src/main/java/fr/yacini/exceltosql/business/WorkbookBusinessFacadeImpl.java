@@ -75,7 +75,7 @@ public class WorkbookBusinessFacadeImpl implements IWorkbookBusinessFacade {
 				DataType dataType = DataType.NULL;
 				String data = null;
 				if (cell != null) {
-					if ((dataType = WorkbookUtils.getPrefixedDataType(header.get(colNumber))) != DataType.NULL) {
+					if ((dataType = WorkbookUtils.getDataTypeFromPrefix(header.get(colNumber))) != DataType.NULL) {
 						data = WorkbookUtils.getData(cell, dataType);
 					} else {
 						switch (cell.getCellTypeEnum()) {

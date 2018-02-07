@@ -1,7 +1,9 @@
 package fr.yacini.exceltosql.util;
 
+import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -89,7 +91,7 @@ public class WorkbookUtils {
 		return isEmptySheet;
 	}
 
-	public static DataType getPrefixedDataType(final String data) {
+	public static DataType getDataTypeFromPrefix(final String data) {
 		final String prefix = data.substring(0, data.indexOf('_'));
 		switch (prefix) {
 			case NUMERIC_PREFIX:
@@ -113,8 +115,10 @@ public class WorkbookUtils {
 			case NUMBER:
 				data = WorkbookUtils.numberToPlainString(cell.getNumericCellValue());
 				break;
-			case STRING:
 			case DATE:
+				data = WorkbookUtils.date(cell, "dd/MM/yy");
+				break;
+			case STRING:
 			case BOOLEAN:
 			default:
 				try {
@@ -125,6 +129,11 @@ public class WorkbookUtils {
 				break;
 		}
 		return data;
+	}
+
+	public static String date(final Cell cell, final String pattern) {
+		final DateFormat df = new SimpleDateFormat(pattern);
+		return df.format(cell.getDateCellValue());
 	}
 
 }
