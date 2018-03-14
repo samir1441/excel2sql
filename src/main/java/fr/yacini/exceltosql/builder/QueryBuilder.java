@@ -52,7 +52,8 @@ public class QueryBuilder {
 					sb.append(cell.getData());
 					break;
 				case DATE:
-					sb.append(QueryBuilderUtils.parseToDate(cell.getData(), "DD/MM/YY"));
+					sb.append(cell.getData() == null ? "null"
+							: QueryBuilderUtils.parseToDate(cell.getData(), "DD/MM/YY"));
 					break;
 				case STRING:
 					sb.append(QueryBuilderUtils.parseToString(cell.getData()));
