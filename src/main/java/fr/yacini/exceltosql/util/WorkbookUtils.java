@@ -132,6 +132,9 @@ public class WorkbookUtils {
 	}
 
 	public static String date(final Cell cell, final String pattern) {
+		if (cell.getDateCellValue() == null) {
+			return null;
+		}
 		final DateFormat df = new SimpleDateFormat(pattern);
 		return df.format(cell.getDateCellValue());
 	}
